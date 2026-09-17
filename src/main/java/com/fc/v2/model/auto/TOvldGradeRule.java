@@ -12,17 +12,18 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 超限运输案件对象 t_ovld_case
+ * 超限吨位等级判定规则对象 t_ovld_grade_rule
  *
  * @author fuce
  * @date 2026-09-12
  */
-@TableName("t_ovld_case")
-@ApiModel(value = "TOvldCase", description = "超限运输案件")
-public class TOvldCase implements Serializable {
+@TableName("t_ovld_grade_rule")
+@ApiModel(value = "TOvldGradeRule", description = "超限吨位等级判定规则")
+public class TOvldGradeRule implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
@@ -31,34 +32,51 @@ public class TOvldCase implements Serializable {
     @ApiModelProperty(value = "主键")
     private Long id;
 
-    /** 案件编号 */
-    @TableField("bill_no")
-    @ApiModelProperty(value = "案件编号")
-    private String billNo;
+    /** 规则编号 */
+    @TableField("rule_code")
+    @ApiModelProperty(value = "规则编号")
+    private String ruleCode;
 
-    /** 当前环节 0..2 */
-    @TableField("node_no")
-    @ApiModelProperty(value = "当前环节 0..2")
-    private Integer nodeNo;
+    /** 规则名称 */
+    @TableField("rule_name")
+    @ApiModelProperty(value = "规则名称")
+    private String ruleName;
 
-    /** 签批模式 0或签 1会签 */
-    @TableField("sign_mode")
-    @ApiModelProperty(value = "签批模式 0或签 1会签")
-    private Integer signMode;
+    /** 第一档上限 */
+    @TableField("th1_max")
+    @ApiModelProperty(value = "第一档上限")
+    private BigDecimal th1Max;
 
-    /** 本环节应签人数 */
-    @TableField("need_count")
-    @ApiModelProperty(value = "本环节应签人数")
-    private Integer needCount;
+    /** 第二档上限 */
+    @TableField("th2_max")
+    @ApiModelProperty(value = "第二档上限")
+    private BigDecimal th2Max;
 
-    /** 本环节已签票数 */
-    @TableField("sign_count")
-    @ApiModelProperty(value = "本环节已签票数")
-    private Integer signCount;
+    /** 第三档上限 */
+    @TableField("th3_max")
+    @ApiModelProperty(value = "第三档上限")
+    private BigDecimal th3Max;
 
-    /** 单据状态 0审批中 1已通过 2已否决 */
+    /** 生效起始时刻 */
+    @TableField("eff_start")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @ApiModelProperty(value = "生效起始时刻")
+    private Date effStart;
+
+    /** 生效截止时刻(不含) */
+    @TableField("eff_end")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @ApiModelProperty(value = "生效截止时刻(不含)")
+    private Date effEnd;
+
+    /** 优先级(数值越大越优先) */
+    @TableField("priority")
+    @ApiModelProperty(value = "优先级(数值越大越优先)")
+    private Integer priority;
+
+    /** 规则状态 0启用 1停用 */
     @TableField("status")
-    @ApiModelProperty(value = "单据状态 0审批中 1已通过 2已否决")
+    @ApiModelProperty(value = "规则状态 0启用 1停用")
     private Integer status;
 
     /** 删除标记 0正常 1删除 */
@@ -101,44 +119,68 @@ public class TOvldCase implements Serializable {
         this.id = id;
     }
 
-    public String getBillNo() {
-        return billNo;
+    public String getRuleCode() {
+        return ruleCode;
     }
 
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
+    public void setRuleCode(String ruleCode) {
+        this.ruleCode = ruleCode;
     }
 
-    public Integer getNodeNo() {
-        return nodeNo;
+    public String getRuleName() {
+        return ruleName;
     }
 
-    public void setNodeNo(Integer nodeNo) {
-        this.nodeNo = nodeNo;
+    public void setRuleName(String ruleName) {
+        this.ruleName = ruleName;
     }
 
-    public Integer getSignMode() {
-        return signMode;
+    public BigDecimal getTh1Max() {
+        return th1Max;
     }
 
-    public void setSignMode(Integer signMode) {
-        this.signMode = signMode;
+    public void setTh1Max(BigDecimal th1Max) {
+        this.th1Max = th1Max;
     }
 
-    public Integer getNeedCount() {
-        return needCount;
+    public BigDecimal getTh2Max() {
+        return th2Max;
     }
 
-    public void setNeedCount(Integer needCount) {
-        this.needCount = needCount;
+    public void setTh2Max(BigDecimal th2Max) {
+        this.th2Max = th2Max;
     }
 
-    public Integer getSignCount() {
-        return signCount;
+    public BigDecimal getTh3Max() {
+        return th3Max;
     }
 
-    public void setSignCount(Integer signCount) {
-        this.signCount = signCount;
+    public void setTh3Max(BigDecimal th3Max) {
+        this.th3Max = th3Max;
+    }
+
+    public Date getEffStart() {
+        return effStart;
+    }
+
+    public void setEffStart(Date effStart) {
+        this.effStart = effStart;
+    }
+
+    public Date getEffEnd() {
+        return effEnd;
+    }
+
+    public void setEffEnd(Date effEnd) {
+        this.effEnd = effEnd;
+    }
+
+    public Integer getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 
     public Integer getStatus() {

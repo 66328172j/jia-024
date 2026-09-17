@@ -15,14 +15,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 超限运输案件对象 t_ovld_case
+ * 卸载处置流转单对象 t_ovld_unload_flow
  *
  * @author fuce
  * @date 2026-09-12
  */
-@TableName("t_ovld_case")
-@ApiModel(value = "TOvldCase", description = "超限运输案件")
-public class TOvldCase implements Serializable {
+@TableName("t_ovld_unload_flow")
+@ApiModel(value = "TOvldUnloadFlow", description = "卸载处置流转单")
+public class TOvldUnloadFlow implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
@@ -31,35 +31,30 @@ public class TOvldCase implements Serializable {
     @ApiModelProperty(value = "主键")
     private Long id;
 
-    /** 案件编号 */
-    @TableField("bill_no")
-    @ApiModelProperty(value = "案件编号")
-    private String billNo;
+    /** 流转单号 */
+    @TableField("biz_no")
+    @ApiModelProperty(value = "流转单号")
+    private String bizNo;
 
-    /** 当前环节 0..2 */
-    @TableField("node_no")
-    @ApiModelProperty(value = "当前环节 0..2")
-    private Integer nodeNo;
+    /** 当前环节 0..3 */
+    @TableField("stage")
+    @ApiModelProperty(value = "当前环节 0..3")
+    private Integer stage;
 
-    /** 签批模式 0或签 1会签 */
-    @TableField("sign_mode")
-    @ApiModelProperty(value = "签批模式 0或签 1会签")
-    private Integer signMode;
-
-    /** 本环节应签人数 */
-    @TableField("need_count")
-    @ApiModelProperty(value = "本环节应签人数")
-    private Integer needCount;
-
-    /** 本环节已签票数 */
-    @TableField("sign_count")
-    @ApiModelProperty(value = "本环节已签票数")
-    private Integer signCount;
-
-    /** 单据状态 0审批中 1已通过 2已否决 */
+    /** 流转状态 0待发起 1在办 2已办结 */
     @TableField("status")
-    @ApiModelProperty(value = "单据状态 0审批中 1已通过 2已否决")
+    @ApiModelProperty(value = "流转状态 0待发起 1在办 2已办结")
     private Integer status;
+
+    /** 备注 */
+    @TableField("content")
+    @ApiModelProperty(value = "备注")
+    private String content;
+
+    /** 最近一次流转动作 */
+    @TableField("last_action")
+    @ApiModelProperty(value = "最近一次流转动作")
+    private String lastAction;
 
     /** 删除标记 0正常 1删除 */
     @TableField("del_flag")
@@ -101,44 +96,20 @@ public class TOvldCase implements Serializable {
         this.id = id;
     }
 
-    public String getBillNo() {
-        return billNo;
+    public String getBizNo() {
+        return bizNo;
     }
 
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
+    public void setBizNo(String bizNo) {
+        this.bizNo = bizNo;
     }
 
-    public Integer getNodeNo() {
-        return nodeNo;
+    public Integer getStage() {
+        return stage;
     }
 
-    public void setNodeNo(Integer nodeNo) {
-        this.nodeNo = nodeNo;
-    }
-
-    public Integer getSignMode() {
-        return signMode;
-    }
-
-    public void setSignMode(Integer signMode) {
-        this.signMode = signMode;
-    }
-
-    public Integer getNeedCount() {
-        return needCount;
-    }
-
-    public void setNeedCount(Integer needCount) {
-        this.needCount = needCount;
-    }
-
-    public Integer getSignCount() {
-        return signCount;
-    }
-
-    public void setSignCount(Integer signCount) {
-        this.signCount = signCount;
+    public void setStage(Integer stage) {
+        this.stage = stage;
     }
 
     public Integer getStatus() {
@@ -147,6 +118,22 @@ public class TOvldCase implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getLastAction() {
+        return lastAction;
+    }
+
+    public void setLastAction(String lastAction) {
+        this.lastAction = lastAction;
     }
 
     public Integer getDelFlag() {

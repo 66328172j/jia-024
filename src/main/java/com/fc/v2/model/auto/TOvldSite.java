@@ -15,14 +15,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 超限运输案件对象 t_ovld_case
+ * 治超站点档案对象 t_ovld_site
  *
  * @author fuce
  * @date 2026-09-12
  */
-@TableName("t_ovld_case")
-@ApiModel(value = "TOvldCase", description = "超限运输案件")
-public class TOvldCase implements Serializable {
+@TableName("t_ovld_site")
+@ApiModel(value = "TOvldSite", description = "治超站点档案")
+public class TOvldSite implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
@@ -31,34 +31,29 @@ public class TOvldCase implements Serializable {
     @ApiModelProperty(value = "主键")
     private Long id;
 
-    /** 案件编号 */
-    @TableField("bill_no")
-    @ApiModelProperty(value = "案件编号")
-    private String billNo;
+    /** 站点编号 */
+    @TableField("site_no")
+    @ApiModelProperty(value = "站点编号")
+    private String siteNo;
 
-    /** 当前环节 0..2 */
-    @TableField("node_no")
-    @ApiModelProperty(value = "当前环节 0..2")
-    private Integer nodeNo;
+    /** 站点名称 */
+    @TableField("site_name")
+    @ApiModelProperty(value = "站点名称")
+    private String siteName;
 
-    /** 签批模式 0或签 1会签 */
-    @TableField("sign_mode")
-    @ApiModelProperty(value = "签批模式 0或签 1会签")
-    private Integer signMode;
+    /** 站点类型 */
+    @TableField("site_type")
+    @ApiModelProperty(value = "站点类型")
+    private String siteType;
 
-    /** 本环节应签人数 */
-    @TableField("need_count")
-    @ApiModelProperty(value = "本环节应签人数")
-    private Integer needCount;
+    /** 所属路段 */
+    @TableField("road_name")
+    @ApiModelProperty(value = "所属路段")
+    private String roadName;
 
-    /** 本环节已签票数 */
-    @TableField("sign_count")
-    @ApiModelProperty(value = "本环节已签票数")
-    private Integer signCount;
-
-    /** 单据状态 0审批中 1已通过 2已否决 */
+    /** 档案状态 0在用 1停用 */
     @TableField("status")
-    @ApiModelProperty(value = "单据状态 0审批中 1已通过 2已否决")
+    @ApiModelProperty(value = "档案状态 0在用 1停用")
     private Integer status;
 
     /** 删除标记 0正常 1删除 */
@@ -101,44 +96,36 @@ public class TOvldCase implements Serializable {
         this.id = id;
     }
 
-    public String getBillNo() {
-        return billNo;
+    public String getSiteNo() {
+        return siteNo;
     }
 
-    public void setBillNo(String billNo) {
-        this.billNo = billNo;
+    public void setSiteNo(String siteNo) {
+        this.siteNo = siteNo;
     }
 
-    public Integer getNodeNo() {
-        return nodeNo;
+    public String getSiteName() {
+        return siteName;
     }
 
-    public void setNodeNo(Integer nodeNo) {
-        this.nodeNo = nodeNo;
+    public void setSiteName(String siteName) {
+        this.siteName = siteName;
     }
 
-    public Integer getSignMode() {
-        return signMode;
+    public String getSiteType() {
+        return siteType;
     }
 
-    public void setSignMode(Integer signMode) {
-        this.signMode = signMode;
+    public void setSiteType(String siteType) {
+        this.siteType = siteType;
     }
 
-    public Integer getNeedCount() {
-        return needCount;
+    public String getRoadName() {
+        return roadName;
     }
 
-    public void setNeedCount(Integer needCount) {
-        this.needCount = needCount;
-    }
-
-    public Integer getSignCount() {
-        return signCount;
-    }
-
-    public void setSignCount(Integer signCount) {
-        this.signCount = signCount;
+    public void setRoadName(String roadName) {
+        this.roadName = roadName;
     }
 
     public Integer getStatus() {

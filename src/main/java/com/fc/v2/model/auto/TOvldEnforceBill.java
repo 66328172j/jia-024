@@ -12,17 +12,18 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 超限运输案件对象 t_ovld_case
+ * 治超处理单对象 t_ovld_enforce_bill
  *
  * @author fuce
  * @date 2026-09-12
  */
-@TableName("t_ovld_case")
-@ApiModel(value = "TOvldCase", description = "超限运输案件")
-public class TOvldCase implements Serializable {
+@TableName("t_ovld_enforce_bill")
+@ApiModel(value = "TOvldEnforceBill", description = "治超处理单")
+public class TOvldEnforceBill implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
@@ -31,34 +32,29 @@ public class TOvldCase implements Serializable {
     @ApiModelProperty(value = "主键")
     private Long id;
 
-    /** 案件编号 */
+    /** 处理单号 */
     @TableField("bill_no")
-    @ApiModelProperty(value = "案件编号")
+    @ApiModelProperty(value = "处理单号")
     private String billNo;
 
-    /** 当前环节 0..2 */
-    @TableField("node_no")
-    @ApiModelProperty(value = "当前环节 0..2")
-    private Integer nodeNo;
+    /** 所属站点 */
+    @TableField("site_id")
+    @ApiModelProperty(value = "所属站点")
+    private Integer siteId;
 
-    /** 签批模式 0或签 1会签 */
-    @TableField("sign_mode")
-    @ApiModelProperty(value = "签批模式 0或签 1会签")
-    private Integer signMode;
+    /** 超限吨位 */
+    @TableField("qty")
+    @ApiModelProperty(value = "超限吨位")
+    private BigDecimal qty;
 
-    /** 本环节应签人数 */
-    @TableField("need_count")
-    @ApiModelProperty(value = "本环节应签人数")
-    private Integer needCount;
+    /** 罚款金额 */
+    @TableField("fine_amt")
+    @ApiModelProperty(value = "罚款金额")
+    private BigDecimal fineAmt;
 
-    /** 本环节已签票数 */
-    @TableField("sign_count")
-    @ApiModelProperty(value = "本环节已签票数")
-    private Integer signCount;
-
-    /** 单据状态 0审批中 1已通过 2已否决 */
+    /** 状态 0待处理 1已处理 2已办结 */
     @TableField("status")
-    @ApiModelProperty(value = "单据状态 0审批中 1已通过 2已否决")
+    @ApiModelProperty(value = "状态 0待处理 1已处理 2已办结")
     private Integer status;
 
     /** 删除标记 0正常 1删除 */
@@ -109,36 +105,28 @@ public class TOvldCase implements Serializable {
         this.billNo = billNo;
     }
 
-    public Integer getNodeNo() {
-        return nodeNo;
+    public Integer getSiteId() {
+        return siteId;
     }
 
-    public void setNodeNo(Integer nodeNo) {
-        this.nodeNo = nodeNo;
+    public void setSiteId(Integer siteId) {
+        this.siteId = siteId;
     }
 
-    public Integer getSignMode() {
-        return signMode;
+    public BigDecimal getQty() {
+        return qty;
     }
 
-    public void setSignMode(Integer signMode) {
-        this.signMode = signMode;
+    public void setQty(BigDecimal qty) {
+        this.qty = qty;
     }
 
-    public Integer getNeedCount() {
-        return needCount;
+    public BigDecimal getFineAmt() {
+        return fineAmt;
     }
 
-    public void setNeedCount(Integer needCount) {
-        this.needCount = needCount;
-    }
-
-    public Integer getSignCount() {
-        return signCount;
-    }
-
-    public void setSignCount(Integer signCount) {
-        this.signCount = signCount;
+    public void setFineAmt(BigDecimal fineAmt) {
+        this.fineAmt = fineAmt;
     }
 
     public Integer getStatus() {
