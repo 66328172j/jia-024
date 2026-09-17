@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -50,6 +51,21 @@ public class TOvldSite implements Serializable {
     @TableField("road_name")
     @ApiModelProperty(value = "所属路段")
     private String roadName;
+
+    /** 第一档上限 */
+    @TableField("th1_max")
+    @ApiModelProperty(value = "第一档上限")
+    private BigDecimal th1Max;
+
+    /** 第二档上限 */
+    @TableField("th2_max")
+    @ApiModelProperty(value = "第二档上限")
+    private BigDecimal th2Max;
+
+    /** 第三档上限 */
+    @TableField("th3_max")
+    @ApiModelProperty(value = "第三档上限")
+    private BigDecimal th3Max;
 
     /** 档案状态 0在用 1停用 */
     @TableField("status")
@@ -126,6 +142,30 @@ public class TOvldSite implements Serializable {
 
     public void setRoadName(String roadName) {
         this.roadName = roadName;
+    }
+
+    public BigDecimal getTh1Max() {
+        return th1Max;
+    }
+
+    public void setTh1Max(BigDecimal th1Max) {
+        this.th1Max = th1Max;
+    }
+
+    public BigDecimal getTh2Max() {
+        return th2Max;
+    }
+
+    public void setTh2Max(BigDecimal th2Max) {
+        this.th2Max = th2Max;
+    }
+
+    public BigDecimal getTh3Max() {
+        return th3Max;
+    }
+
+    public void setTh3Max(BigDecimal th3Max) {
+        this.th3Max = th3Max;
     }
 
     public Integer getStatus() {

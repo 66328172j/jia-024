@@ -42,6 +42,11 @@ public class TOvldEnforceBill implements Serializable {
     @ApiModelProperty(value = "所属站点")
     private Integer siteId;
 
+    /** 站点编号 */
+    @TableField("site_no")
+    @ApiModelProperty(value = "站点编号")
+    private String siteNo;
+
     /** 超限吨位 */
     @TableField("qty")
     @ApiModelProperty(value = "超限吨位")
@@ -111,6 +116,14 @@ public class TOvldEnforceBill implements Serializable {
 
     public void setSiteId(Integer siteId) {
         this.siteId = siteId;
+    }
+
+    public String getSiteNo() {
+        return siteNo;
+    }
+
+    public void setSiteNo(String siteNo) {
+        this.siteNo = siteNo;
     }
 
     public BigDecimal getQty() {

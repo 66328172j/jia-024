@@ -11,10 +11,8 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fc.v2.common.support.ConvertUtil;
 import com.fc.v2.mapper.auto.TOvldEnforceBillMapper;
-import com.fc.v2.mapper.auto.TOvldGradeRuleMapper;
 import com.fc.v2.mapper.auto.TOvldSiteMapper;
 import com.fc.v2.model.auto.TOvldEnforceBill;
-import com.fc.v2.model.auto.TOvldGradeRule;
 import com.fc.v2.model.auto.TOvldSite;
 import com.fc.v2.service.ITOvldEnforceBillService;
 import com.fc.v2.util.StringUtils;
@@ -32,9 +30,6 @@ public class TOvldEnforceBillServiceImpl extends ServiceImpl<TOvldEnforceBillMap
 
     @Autowired
     private TOvldSiteMapper ovldSiteMapper;
-
-    @Autowired
-    private TOvldGradeRuleMapper ovldGradeRuleMapper;
 
     @Override
     public TOvldEnforceBill selectTOvldEnforceBillById(Long id) {
@@ -66,6 +61,7 @@ public class TOvldEnforceBillServiceImpl extends ServiceImpl<TOvldEnforceBillMap
         if (refArch.getStatus() != null && refArch.getStatus() == 1) {
             return 0;
         }
+        record.setSiteNo(refArch.getSiteNo());
         if (StringUtils.isNotEmpty(record.getBillNo())) {
             Integer dupCnt = this.baseMapper.selectCount(new QueryWrapper<TOvldEnforceBill>()
                     .eq("bill_no", record.getBillNo()).eq("del_flag", 0));
@@ -73,8 +69,7 @@ public class TOvldEnforceBillServiceImpl extends ServiceImpl<TOvldEnforceBillMap
                 return 0;
             }
         }
-        TOvldGradeRule bandArch = ovldGradeRuleMapper.selectOne(new QueryWrapper<TOvldGradeRule>()
-                .eq("status", 0).eq("del_flag", 0).orderByDesc("priority").last("limit 1"));
+        TOvldSite bandArch = ovldSiteMapper.selectById(record.getSiteId());
         BigDecimal bandVal = record.getQty();
         int bandLevel = 0;
         if (bandVal != null && bandArch != null) {
@@ -88,7 +83,7 @@ public class TOvldEnforceBillServiceImpl extends ServiceImpl<TOvldEnforceBillMap
                 bandLevel = 4;
             }
         }
-        record.setFineAmt(java.math.BigDecimal.valueOf(bandLevel));
+        record.setStatus(bandLevel);
 
         record.setDelFlag(0);
         return this.baseMapper.insert(record);
